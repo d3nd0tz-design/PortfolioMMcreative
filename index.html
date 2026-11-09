@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Studio® – Design Agency</title>
+<title>MM Creative – Design & Multimedia Agency</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* ===== EDIT WARNA & FONT DI SINI ===== */
@@ -27,14 +27,15 @@ nav ul{display:flex;gap:28px;list-style:none}
 nav a:hover{opacity:.6}
 @media(max-width:700px){nav ul{gap:14px;font-size:.75rem}}
 
-/* HERO */
-#hero{min-height:100vh;border:0;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:var(--pad);
+/* HERO (Diperbaiki agar tidak nabrak navbar di layar kecil) */
+#hero{min-height:100vh;border:0;display:flex;flex-direction:column;justify-content:flex-end;
+  padding-top:100px;padding-bottom:var(--pad);
   background:radial-gradient(60% 50% at 80% 20%,#1d2a05 0%,transparent 70%)}
 .judul-atas {
-    font-size: clamp(2vw, 5vw, 4vw);line-height:.92;letter-spacing:-.045em;font-weight:500;max-width:12ch}
-#hero p{max-width:460px;color:var(--muted);margin:32px 0 60px;font-size:1.05rem}
+  font-size: clamp(2rem, 5vw, 4rem);line-height:.95;letter-spacing:-.045em;font-weight:500;max-width:14ch}
+#hero p{max-width:460px;color:var(--muted);margin:28px 0 50px;font-size:1.05rem}
 .judul-bawah {
-    font-size: clamp(4vw, 12vw, 10vw);font-weight:700;letter-spacing:-.06em;line-height:.8;white-space:nowrap}
+  font-size: clamp(2.8rem, 11vw, 10rem);font-weight:700;letter-spacing:-.06em;line-height:.85;white-space:nowrap}
 
 /* WORK */
 .work{display:grid;grid-template-columns:1fr 1.4fr;gap:40px;align-items:center;padding:28px 0;border-top:1px solid var(--line)}
@@ -54,12 +55,33 @@ nav a:hover{opacity:.6}
 .about p{font-size:clamp(1.3rem,2.6vw,2.2rem);line-height:1.3;letter-spacing:-.02em;max-width:26em;margin-bottom:28px}
 .about p+p{color:var(--muted)}
 
-/* TEAM */
+/* TEAM (Kartu Interaktif + Tombol Porto & Sosmed) */
 .team{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px}
-.member .photo{aspect-ratio:1;border-radius:10px;margin-bottom:14px;filter:grayscale(1);transition:.4s}
+.member{cursor:pointer;padding:12px;border-radius:14px;border:1px solid var(--line);transition:.35s;background:rgba(255,255,255,0.015)}
+.member:hover{border-color:var(--member-color, var(--accent));background:rgba(255,255,255,0.04);transform:translateY(-6px)}
+.member .photo{aspect-ratio:1;border-radius:10px;margin-bottom:14px;overflow:hidden;filter:grayscale(1);transition:.4s;background:#1a1a1a}
 .member:hover .photo{filter:none}
-.member h4{font-weight:500}
-.member span{color:var(--muted);font-size:.9rem}
+.member h3{font-size:1.15rem;font-weight:500;transition:.3s}
+.member:hover h3{color:var(--member-color, var(--accent))}
+.member .role{color:var(--muted);font-size:.85rem;margin-top:2px;margin-bottom:14px}
+
+.member-links{display:flex;gap:8px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--line)}
+.m-btn{font-size:.75rem;padding:5px 10px;border-radius:100px;border:1px solid var(--line);color:var(--fg);transition:.25s;letter-spacing:.02em;display:inline-block}
+.m-btn:hover{border-color:var(--member-color, var(--accent));background:var(--member-color, var(--accent));color:#0b0b0b;font-weight:500}
+
+/* MODAL POP-UP PORTOFOLIO ANGGOTA */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.82);backdrop-filter:blur(10px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .3s ease}
+.modal-overlay.active{display:flex;opacity:1}
+.modal-box{background:#141414;border:1px solid var(--line);border-radius:16px;max-width:720px;width:100%;max-height:88vh;overflow-y:auto;padding:clamp(20px,4vw,36px);position:relative}
+.modal-close{position:sticky;top:0;float:right;background:#222;border:1px solid var(--line);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.2s}
+.modal-close:hover{background:var(--accent);color:#000}
+.modal-header{display:flex;gap:18px;align-items:center;margin-bottom:22px;flex-wrap:wrap}
+.modal-header img{width:76px;height:76px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);background:#222}
+.modal-works{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-top:14px}
+.modal-work-item{background:#0b0b0b;border:1px solid var(--line);border-radius:10px;overflow:hidden;transition:.3s;display:block}
+.modal-work-item:hover{border-color:var(--accent);transform:translateY(-3px)}
+.modal-work-item img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#1a1a1a}
+.modal-work-item div{padding:10px 12px;font-size:.82rem}
 
 /* AWARDS */
 .award{display:grid;grid-template-columns:140px 1fr 2fr;gap:24px;padding:22px 0;border-top:1px solid var(--line);color:var(--muted);transition:.3s}
@@ -80,29 +102,10 @@ footer{padding:clamp(70px,10vw,120px) var(--pad) 24px;border-top:1px solid var(-
 .cols{display:flex;gap:60px;flex-wrap:wrap;margin-bottom:80px}
 .cols div{display:flex;flex-direction:column;gap:8px}
 .cols .label{margin-bottom:10px}
-.cols a{
-  width:fit-content;
-  position:relative;
-  transition:color .3s ease, transform .2s ease;
-  cursor:pointer;
-}
-.cols a:hover{
-  color:var(--accent);
-  transform:translateX(4px);
-}
-.cols a::after{
-  content:'';
-  position:absolute;
-  width:0;
-  height:1px;
-  bottom:-2px;
-  left:0;
-  background-color:var(--accent);
-  transition:width .3s ease;
-}
-.cols a:hover::after{
-  width:100%;
-}
+.cols a{width:fit-content;position:relative;transition:color .3s ease, transform .2s ease;cursor:pointer}
+.cols a:hover{color:var(--accent);transform:translateX(4px)}
+.cols a::after{content:'';position:absolute;width:0;height:1px;bottom:-2px;left:0;background-color:var(--accent);transition:width .3s ease}
+.cols a:hover::after{width:100%}
 .copy{display:flex;justify-content:space-between;color:var(--muted);font-size:.8rem;margin-top:30px}
 
 /* Reveal animation */
@@ -132,16 +135,16 @@ footer{padding:clamp(70px,10vw,120px) var(--pad) 24px;border-top:1px solid var(-
 <!-- ===== WORK ===== -->
 <section id="work">
   <div class="label">(Work)</div>
-<a class="work rv" href="#">
+  <a class="work rv" href="#">
     <div>
       <h3>Motion Reel</h3>
       <small>MOTION GRAPHICS · 2026</small>
     </div>
     <div class="thumb t1">
       <video autoplay loop muted playsinline preload="metadata">
-  <source src="motion.mp4" type="video/mp4">
-  <source src="motion.webm" type="video/webm">
-</video>
+        <source src="motion.mp4" type="video/mp4">
+        <source src="motion.webm" type="video/webm">
+      </video>
     </div>
   </a>
   <a class="work rv" href="#">
@@ -174,7 +177,7 @@ footer{padding:clamp(70px,10vw,120px) var(--pad) 24px;border-top:1px solid var(-
 
 <!-- ===== TEAM ===== -->
 <section id="team">
-  <div class="label">(Meet us)</div>
+  <div class="label">(Meet us — Klik profil untuk melihat karya)</div>
   <div class="team" id="teamGrid"></div>
 </section>
 
@@ -196,33 +199,102 @@ footer{padding:clamp(70px,10vw,120px) var(--pad) 24px;border-top:1px solid var(-
     <div>
       <span class="label">(Let's connect)</span>
       <a href="mailto:MMCreative@gmail.com">MMCreative@gmail.com</a>
-      <a href="https://wa.me/085755097681?text=Halo%20MM%20Creative,%20saya%20ingin%20konsultasi%20project" target="_blank" rel="noopener noreferrer">Book a Call</a>
+      <a href="https://wa.me/6285755097681?text=Halo%20MM%20Creative,%20saya%20ingin%20konsultasi%20project" target="_blank" rel="noopener noreferrer">Book a Call</a>
     </div>
     <div>
       <span class="label">(Follow us)</span>
-      <a href="https://www.linkedin.com/in/username_kamu" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://x.com/" target="_blank" rel="noopener noreferrer">X</a>
+      <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="https://www.instagram.com/mmcreative.studio25" target="_blank" rel="noopener noreferrer">Instagram</a>
     </div>
     <div>
-  <span class="label">(Location)</span>
-  <span>Jawa Timur, Indonesia</span>
-  <span>Available for Freelance</span>
-</div>
+      <span class="label">(Location)</span>
+      <span style="color:var(--muted)">Jawa Timur, Indonesia</span>
+      <span style="color:var(--accent);font-size:.85rem">● Available for Project</span>
+    </div>
   </div>
   <div class="wordmark">MM CREATIVE</div>
   <div class="copy"><span>© 2026 MM Creative</span><span>Made with HTML</span></div>
 </footer>
 
+<!-- ===== MODAL POP-UP PROFIL & KARYA ===== -->
+<div class="modal-overlay" id="memberModal" onclick="if(event.target===this) closeModal()">
+  <div class="modal-box" id="modalContent"></div>
+</div>
+
 <script>
-/* ===== EDIT KONTEN DI SINI ===== */
+/* ===== EDIT DATA ANGGOTA TIM, LINK IG, & KARYA DI SINI ===== */
 const team = [
-    ["Nur Zidan Ilmi", "Leader", "#d6ff3f", "zidan.jpg"],       //
-    ["Ezha Abiyuu", "Videography & Cinematography", "#ff6b3d", "ezha.jpg"], 
-    ["Ahmad Musyafa S.", "Motion Graphic Designer", "#6b8bff", "ahmad.jpg"],
-    ["Nabil Ahmad Dinajah", "Graphic Designer", "#ff3d9a", "nabil.jpg"],
-    ["Rahmat Ahya Almawa", "Photographer", "#3dffc8", "raya.jpg"],
-    ["Kholil Nasiruddin", "Strategy & konsultan", "#ffc53d", "jasper.jpg"]
+  {
+    name: "Nur Zidan Ilmi",
+    role: "Leader",
+    color: "#d6ff3f",
+    photo: "zidan.jpg",
+    ig: "https://instagram.com/zidan_ilmy",
+    bio: "Mengawasi arah kreatif proyek multimedia, fotografi potret & event, desain grafis, serta pengembangan web.",
+    works: [
+      { title: "Event & Portrait Photography", img: "desain.png", link: "#" },
+      { title: "Social Media & Typography Design", img: "desain.png", link: "#" }
+    ]
+  },
+  {
+    name: "Ezha Abiyuu",
+    role: "Videography & Cinematography",
+    color: "#d6ff3f",
+    photo: "ezha.jpg",
+    ig: "https://instagram.com/ezhabiuuu_",
+    bio: "Spesialis pengambilan gambar sinematik, dokumentasi event, dan produksi video komersial.",
+    works: [
+      { title: "Cinematic Aftermovie 2026", img: "desain.png", link: "#" }
+    ]
+  },
+  {
+    name: "Ahmad Musyafa S.",
+    role: "Motion Graphic Designer",
+    color: "#d6ff3f",
+    photo: "ahmad.jpg",
+    ig: "https://instagram.com/saprol_loll",
+    bio: "Merancang animasi visual dinamis, bumper video, dan elemen grafis bergerak.",
+    works: [
+      { title: "Motion Reel 2026", img: "desain.png", link: "#" }
+    ]
+  },
+  {
+    name: "Nabil Ahmad Dinajah",
+    role: "Graphic Designer",
+    color: "#d6ff3f",
+    photo: "nabil.jpg",
+    ig: "https://instagram.com/_nabilahmad",
+    bio: "Fokus pada identitas visual, poster kreatif, dan desain publikasi media sosial.",
+    works: [
+      { title: "Mockup Design", img: "POLO.png", link: "#" },
+      { title: "Desain FeedInstagram", img: "posterig.png", link: "#" }
+    ]
+  },
+  {
+    name: "Rahmat Ahya Almawa",
+    role: "Photographer",
+    color: "#d6ff3f",
+    photo: "raya.jpg",
+    ig: "https://instagram.com/rayaa.almawa",
+    bio: "Menangkap momen terbaik untuk dokumentasi acara, wisuda, dan sesi foto profesional.",
+    works: [
+      { title: "Graduation & Intimate Session", img: "desain.png", link: "#" }
+    ]
+  },
+  {
+    name: "Kholil Nasiruddin",
+    role: "Strategy & Konsultan",
+    color: "#d6ff3f",
+    photo: "desain.png", /* Ganti dengan nama file foto Kholil jika sudah ada di folder */
+    ig: "https://instagram.com/",
+    bio: "Menyusun strategi komunikasi visual, konsultasi kreatif, dan perencanaan produksi tim.",
+    works: [
+      { title: "Creative Strategy & Direction", img: "desain.png", link: "#" }
+    ]
+  }
 ];
+
 const awards = [
   ["2024","Juara 2 Film","Site of the Day"],
   ["2025","","Outstanding achievement in web design"],
@@ -230,6 +302,7 @@ const awards = [
   ["May 2023","The Drum Awards","Creative Technology"],
   ["Mar 2023","International Design Awards","Interactive media & web design"]
 ];
+
 const services = [
   ["Videography & Cinematography","Perekaman video event, portofolio profil, dokumentasi kegiatan, hingga produksi konten visual profesional menggunakan setup kamera dan lensa andalan Anda."],
   ["Photography & Portraiture","Jasa foto event, sesi potret, dokumentasi kreatif, hingga layanan fotografi komersial atau wisuda."],
@@ -239,22 +312,66 @@ const services = [
   ["Creative Consultation & Production","Kolaborasi produksi konten multimedia untuk kebutuhan instansi, lembaga, atau proyek kreatif institusional."]
 ];
 
-/* ===== RENDER (tidak perlu diubah) ===== */
-document.getElementById('teamGrid').innerHTML = team.map(([n, r, c, foto])=>`
-    <div class="member rv">
-        <div class="photo">
-            <img src="${foto}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
-        </div>
-        <div class="info">
-            <h3>${n}</h3>
-            <p>${r}</p>
-        </div>
+/* ===== RENDER TEAM DENGAN TOMBOL PORTO & SOSMED ===== */
+document.getElementById('teamGrid').innerHTML = team.map((m, index) => `
+  <div class="member rv" style="--member-color: ${m.color}" onclick="openModal(${index})">
+    <div class="photo">
+      <img src="${m.photo}" alt="${m.name}" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
+    <div class="info">
+      <h3>${m.name}</h3>
+      <p class="role">${m.role}</p>
+      <div class="member-links">
+        <span class="m-btn">Lihat Karya (${m.works.length})</span>
+        <a href="${m.ig}" target="_blank" rel="noopener noreferrer" class="m-btn" onclick="event.stopPropagation()">Instagram ↗</a>
+      </div>
+    </div>
+  </div>
 `).join('');
+
+/* ===== FUNGSI POP-UP MODAL ===== */
+function openModal(index) {
+  const m = team[index];
+  const modal = document.getElementById('memberModal');
+  const content = document.getElementById('modalContent');
+  
+  content.innerHTML = `
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-header">
+      <img src="${m.photo}" alt="${m.name}" style="border-color: ${m.color}">
+      <div>
+        <h2 style="color: ${m.color}">${m.name}</h2>
+        <p style="color: var(--muted); font-size: .95rem">${m.role}</p>
+      </div>
+    </div>
+    <p style="margin-bottom: 20px; color: #ccc;">${m.bio}</p>
+    <div style="margin-bottom: 26px;">
+      <a href="${m.ig}" target="_blank" rel="noopener noreferrer" class="m-btn" style="border-color: ${m.color}; padding: 8px 16px;">Kunjungi Instagram ↗</a>
+    </div>
+    <div class="label" style="margin-bottom: 12px;">(Selected Works by ${m.name.split(' ')[0]})</div>
+    <div class="modal-works">
+      ${m.works.map(w => `
+        <a href="${w.link}" target="_blank" class="modal-work-item">
+          <img src="${w.img}" alt="${w.title}">
+          <div>${w.title}</div>
+        </a>
+      `).join('')}
+    </div>
+  `;
+  modal.classList.add('active');
+}
+
+function closeModal() {
+  document.getElementById('memberModal').classList.remove('active');
+}
+
+/* ===== RENDER AWARDS & SERVICES ===== */
 document.getElementById('awardList').innerHTML = awards.map(([d,t,x])=>
   `<div class="award rv"><span>${d}</span><b>${t}</b><span>${x}</span></div>`).join('');
+
 document.getElementById('serviceList').innerHTML = services.map(([t,p],i)=>
   `<div class="service rv"><h3><span>${String(i+1).padStart(2,'0')} ${t}</span></h3><p>${p}</p></div>`).join('');
+
 document.querySelectorAll('.service').forEach(s=>s.onclick=()=>s.classList.toggle('open'));
 
 const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
