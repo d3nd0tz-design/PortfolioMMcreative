@@ -78,9 +78,31 @@ nav a:hover{opacity:.6}
 /* FOOTER */
 footer{padding:clamp(70px,10vw,120px) var(--pad) 24px;border-top:1px solid var(--line)}
 .cols{display:flex;gap:60px;flex-wrap:wrap;margin-bottom:80px}
-.cols div{display:flex;flex-direction:column;gap:6px}
+.cols div{display:flex;flex-direction:column;gap:8px}
 .cols .label{margin-bottom:10px}
-.cols a:hover{color:var(--accent)}
+.cols a{
+  width:fit-content;
+  position:relative;
+  transition:color .3s ease, transform .2s ease;
+  cursor:pointer;
+}
+.cols a:hover{
+  color:var(--accent);
+  transform:translateX(4px);
+}
+.cols a::after{
+  content:'';
+  position:absolute;
+  width:0;
+  height:1px;
+  bottom:-2px;
+  left:0;
+  background-color:var(--accent);
+  transition:width .3s ease;
+}
+.cols a:hover::after{
+  width:100%;
+}
 .copy{display:flex;justify-content:space-between;color:var(--muted);font-size:.8rem;margin-top:30px}
 
 /* Reveal animation */
@@ -171,9 +193,21 @@ footer{padding:clamp(70px,10vw,120px) var(--pad) 24px;border-top:1px solid var(-
 <!-- ===== FOOTER ===== -->
 <footer id="contact">
   <div class="cols">
-    <div><span class="label">(Let's connect)</span><a href="mailto:hello@studio.com">hello@studio.com</a><a href="#">Book a Call</a></div>
-    <div><span class="label">(Follow us)</span><a href="#">X</a><a href="#">LinkedIn</a><a href="#">Instagram</a></div>
-    <div><span class="label">(Legal)</span><a href="#">Privacy Policy</a><a href="#">Cookie Policy</a></div>
+    <div>
+      <span class="label">(Let's connect)</span>
+      <a href="mailto:MMCreative@gmail.com">MMCreative@gmail.com</a>
+      <a href="https://wa.me/085755097681?text=Halo%20MM%20Creative,%20saya%20ingin%20konsultasi%20project" target="_blank" rel="noopener noreferrer">Book a Call</a>
+    </div>
+    <div>
+      <span class="label">(Follow us)</span>
+      <a href="https://www.linkedin.com/in/username_kamu" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://www.instagram.com/mmcreative.studio25" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </div>
+    <div>
+      <span class="label">(Legal)</span>
+      <a href="#privacy-policy">Privacy Policy</a>
+      <a href="#cookie-policy">Cookie Policy</a>
+    </div>
   </div>
   <div class="wordmark">MM CREATIVE</div>
   <div class="copy"><span>© 2026 MM Creative</span><span>Made with HTML</span></div>
