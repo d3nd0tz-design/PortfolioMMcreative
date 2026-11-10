@@ -27,7 +27,7 @@ nav ul{display:flex;gap:28px;list-style:none}
 nav a:hover{opacity:.6}
 @media(max-width:700px){nav ul{gap:14px;font-size:.75rem}}
 
-/* HERO (Diperbaiki agar tidak nabrak navbar di layar kecil) */
+/* HERO */
 #hero{min-height:100vh;border:0;display:flex;flex-direction:column;justify-content:flex-end;
   padding-top:100px;padding-bottom:var(--pad);
   background:radial-gradient(60% 50% at 80% 20%,#1d2a05 0%,transparent 70%)}
@@ -55,7 +55,7 @@ nav a:hover{opacity:.6}
 .about p{font-size:clamp(1.3rem,2.6vw,2.2rem);line-height:1.3;letter-spacing:-.02em;max-width:26em;margin-bottom:28px}
 .about p+p{color:var(--muted)}
 
-/* TEAM (Kartu Interaktif + Tombol Porto & Sosmed) */
+/* TEAM */
 .team{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px}
 .member{cursor:pointer;padding:12px;border-radius:14px;border:1px solid var(--line);transition:.35s;background:rgba(255,255,255,0.015)}
 .member:hover{border-color:var(--member-color, var(--accent));background:rgba(255,255,255,0.04);transform:translateY(-6px)}
@@ -70,18 +70,35 @@ nav a:hover{opacity:.6}
 .m-btn:hover{border-color:var(--member-color, var(--accent));background:var(--member-color, var(--accent));color:#0b0b0b;font-weight:500}
 
 /* MODAL POP-UP PORTOFOLIO ANGGOTA */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.82);backdrop-filter:blur(10px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .3s ease}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(10px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .3s ease}
 .modal-overlay.active{display:flex;opacity:1}
-.modal-box{background:#141414;border:1px solid var(--line);border-radius:16px;max-width:720px;width:100%;max-height:88vh;overflow-y:auto;padding:clamp(20px,4vw,36px);position:relative}
-.modal-close{position:sticky;top:0;float:right;background:#222;border:1px solid var(--line);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.2s}
+.modal-box{background:#141414;border:1px solid var(--line);border-radius:16px;max-width:640px;width:100%;max-height:90vh;overflow-y:auto;overflow-x:hidden;padding:clamp(20px,3vw,32px);position:relative}
+.modal-close{position:sticky;top:0;float:right;background:#222;border:1px solid var(--line);color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:.2s;z-index:10}
 .modal-close:hover{background:var(--accent);color:#000}
-.modal-header{display:flex;gap:18px;align-items:center;margin-bottom:22px;flex-wrap:wrap}
-.modal-header img{width:76px;height:76px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);background:#222}
-.modal-works{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-top:14px}
-.modal-work-item{background:#0b0b0b;border:1px solid var(--line);border-radius:10px;overflow:hidden;transition:.3s;display:block}
-.modal-work-item:hover{border-color:var(--accent);transform:translateY(-3px)}
-.modal-work-item img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#1a1a1a}
-.modal-work-item div{padding:10px 12px;font-size:.82rem}
+.modal-header{display:flex;gap:16px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+.modal-header img{width:72px!important;height:72px!important;min-width:72px;border-radius:50%;object-fit:cover;border:2px solid var(--accent);background:#222;display:block}
+
+/* SLIDER KARYA DI DALAM MODAL */
+.slider-wrap{position:relative;margin-top:12px;background:#0b0b0b;border:1px solid var(--line);border-radius:12px;overflow:hidden;width:100%}
+.slider-track{display:flex;width:100%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;-ms-overflow-style:none}
+.slider-track::-webkit-scrollbar{display:none}
+.slide-item{flex:0 0 100%;width:100%;max-width:100%;scroll-snap-align:center;position:relative;display:flex;flex-direction:column}
+.slide-media{width:100%;height:300px;background:#080808;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.slide-media img, .slide-media video{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain;display:block}
+.slide-caption{padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);background:#101010}
+.slide-caption span{font-size:.9rem;font-weight:500}
+.slide-counter{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+
+/* Tombol Geser Kiri & Kanan */
+.slide-btn{position:absolute;top:calc(50% - 22px);transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:rgba(15,15,15,0.8);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.25);color:#fff;font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;z-index:5}
+.slide-btn:hover{background:var(--accent);color:#000;border-color:var(--accent);transform:translateY(-50%) scale(1.08)}
+.slide-btn.prev{left:12px}
+.slide-btn.next{right:12px}
+
+/* Titik Indikator (Dots) di Bawah Slide */
+.slide-dots{display:flex;justify-content:center;gap:6px;padding:12px 0 4px}
+.slide-dot{width:7px;height:7px;border-radius:50%;background:#333;cursor:pointer;transition:.3s}
+.slide-dot.active{width:22px;border-radius:10px;background:var(--accent)}
 
 /* AWARDS */
 .award{display:grid;grid-template-columns:140px 1fr 2fr;gap:24px;padding:22px 0;border-top:1px solid var(--line);color:var(--muted);transition:.3s}
@@ -198,14 +215,14 @@ footer{padding:clamp(70px,10vw,120px) var(--pad) 24px;border-top:1px solid var(-
   <div class="cols">
     <div>
       <span class="label">(Let's connect)</span>
-      <a href="mailto:MMCreative@gmail.com">MMCreative@gmail.com</a>
-      <a href="https://wa.me/6285755097681?text=Halo%20MM%20Creative,%20saya%20ingin%20konsultasi%20project" target="_blank" rel="noopener noreferrer">Book a Call</a>
+      <a href="mailto:MMCreative@gmail.com">mm@gmail.com</a>
+      <a href="https://wa.me/6281234567890?text=Halo%20MM%20Creative,%20saya%20ingin%20konsultasi%20project" target="_blank" rel="noopener noreferrer">Book a Call</a>
     </div>
     <div>
       <span class="label">(Follow us)</span>
       <a href="https://x.com/" target="_blank" rel="noopener noreferrer">X</a>
       <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a href="https://www.instagram.com/mmcreative.studio25" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a>
     </div>
     <div>
       <span class="label">(Location)</span>
@@ -223,7 +240,7 @@ footer{padding:clamp(70px,10vw,120px) var(--pad) 24px;border-top:1px solid var(-
 </div>
 
 <script>
-/* ===== EDIT DATA ANGGOTA TIM, LINK IG, & KARYA DI SINI ===== */
+/* ===== EDIT DATA ANGGOTA TIM, LINK IG, & SLIDE KARYA DI SINI ===== */
 const team = [
   {
     name: "Nur Zidan Ilmi",
@@ -233,74 +250,81 @@ const team = [
     ig: "https://instagram.com/zidan_ilmy",
     bio: "Mengawasi arah kreatif proyek multimedia, fotografi potret & event, desain grafis, serta pengembangan web.",
     works: [
-      { title: "Event & Portrait Photography", img: "desain.png", link: "#" },
-      { title: "Social Media & Typography Design", img: "desain.png", link: "#" }
+      { title: "Dendots Brand Identity", img: "dendots.png" },
+      { title: "Visual Identity Design", img: "desainerlord.png" },
+      { title: "Photography", img: "hasillord.jpg" }
     ]
   },
   {
     name: "Ezha Abiyuu",
     role: "Videography & Cinematography",
-    color: "#d6ff3f",
+    color: "#ff6b3d",
     photo: "ezha.jpg",
     ig: "https://instagram.com/ezhabiuuu_",
     bio: "Spesialis pengambilan gambar sinematik, dokumentasi event, dan produksi video komersial.",
     works: [
-      { title: "Cinematic Aftermovie 2026", img: "desain.png", link: "#" }
+      { title: "Konten Video", img: "ezha.webm" },
+      { title: "Highlight Reel", img: "ezha2.mp4" }
     ]
   },
   {
     name: "Ahmad Musyafa S.",
     role: "Motion Graphic Designer",
-    color: "#d6ff3f",
-    photo: "ahmad.jpg",
+    color: "#6b8bff",
+    photo: "sapax.jpg",
     ig: "https://instagram.com/saprol_loll",
     bio: "Merancang animasi visual dinamis, bumper video, dan elemen grafis bergerak.",
     works: [
-      { title: "Motion Reel 2026", img: "desain.png", link: "#" }
+      { title: "Motion Graphic Event", img: "motion2.webm" },
+      { title: "Motion Reel 2026", img: "" },
+      { title: "Animated Social Media Content", img: "" }
     ]
   },
   {
     name: "Nabil Ahmad Dinajah",
     role: "Graphic Designer",
-    color: "#d6ff3f",
+    color: "#ff3d9a",
     photo: "nabil.jpg",
     ig: "https://instagram.com/_nabilahmad",
     bio: "Fokus pada identitas visual, poster kreatif, dan desain publikasi media sosial.",
     works: [
-      { title: "Mockup Design", img: "POLO.png", link: "#" },
-      { title: "Desain FeedInstagram", img: "posterig.png", link: "#" }
+      { title: "Social Media Campaign", img: "HasilMad.png" },
+      { title: "Mockup Design", img: "POLO.png" },
+      { title: "Merchandise Design", img: "GANCI PANJANG.png" }
     ]
   },
   {
     name: "Rahmat Ahya Almawa",
     role: "Photographer",
-    color: "#d6ff3f",
-    photo: "raya.jpg",
-    ig: "https://instagram.com/rayaa.almawa",
+    color: "#3dffc8",
+    photo: "kaji.jpg",
+    ig: "https://instagram.com/",
     bio: "Menangkap momen terbaik untuk dokumentasi acara, wisuda, dan sesi foto profesional.",
     works: [
-      { title: "Graduation & Intimate Session", img: "desain.png", link: "#" }
+      { title: "Graduation Session", img: "hasilkaji.jpg" },
+      { title: "Event Documentation", img: "" },
+      { title: "Portrait Photography", img: "hasilkaji2.jpg" }
     ]
   },
   {
-    name: "Kholil Nasiruddin",
+    name: "Hambaallah",
     role: "Strategy & Konsultan",
-    color: "#d6ff3f",
-    photo: "desain.png", /* Ganti dengan nama file foto Kholil jika sudah ada di folder */
+    color: "#ffc53d",
+    photo: "zidan.jpg", /* Ganti dengan nama file foto Kholil jika sudah ada */
     ig: "https://instagram.com/",
     bio: "Menyusun strategi komunikasi visual, konsultasi kreatif, dan perencanaan produksi tim.",
     works: [
-      { title: "Creative Strategy & Direction", img: "desain.png", link: "#" }
+      { title: "Creative Strategy & Direction", img: "posterig.png" },
+      { title: "Brand Consultation", img: "POLO.png" }
     ]
   }
 ];
 
 const awards = [
-  ["2024","Juara 2 Film","Site of the Day"],
-  ["2025","","Outstanding achievement in web design"],
-  ["Sep 2023","Mobile Excellence Awards","Best mobile user experience"],
-  ["May 2023","The Drum Awards","Creative Technology"],
-  ["Mar 2023","International Design Awards","Interactive media & web design"]
+  ["2024","Juara 2 Film","Sandra Dilema"],
+  ["2025","Juara 1 Motion Graphics","Awwwards"],
+  ["2025","Best Design","CSS Design Awards"]
+
 ];
 
 const services = [
@@ -329,11 +353,16 @@ document.getElementById('teamGrid').innerHTML = team.map((m, index) => `
   </div>
 `).join('');
 
-/* ===== FUNGSI POP-UP MODAL ===== */
+/* ===== FUNGSI POP-UP MODAL DENGAN SLIDER FOTO ===== */
+let currentSlide = 0;
+let totalSlides = 0;
+
 function openModal(index) {
   const m = team[index];
   const modal = document.getElementById('memberModal');
   const content = document.getElementById('modalContent');
+  currentSlide = 0;
+  totalSlides = m.works.length;
   
   content.innerHTML = `
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -344,21 +373,83 @@ function openModal(index) {
         <p style="color: var(--muted); font-size: .95rem">${m.role}</p>
       </div>
     </div>
-    <p style="margin-bottom: 20px; color: #ccc;">${m.bio}</p>
-    <div style="margin-bottom: 26px;">
-      <a href="${m.ig}" target="_blank" rel="noopener noreferrer" class="m-btn" style="border-color: ${m.color}; padding: 8px 16px;">Kunjungi Instagram ↗</a>
+    <p style="margin-bottom: 18px; color: #ccc; font-size: .95rem;">${m.bio}</p>
+    <div style="margin-bottom: 22px;">
+      <a href="${m.ig}" target="_blank" rel="noopener noreferrer" class="m-btn" style="border-color: ${m.color}; padding: 7px 15px;">Kunjungi Instagram ↗</a>
     </div>
-    <div class="label" style="margin-bottom: 12px;">(Selected Works by ${m.name.split(' ')[0]})</div>
-    <div class="modal-works">
-      ${m.works.map(w => `
-        <a href="${w.link}" target="_blank" class="modal-work-item">
-          <img src="${w.img}" alt="${w.title}">
-          <div>${w.title}</div>
-        </a>
-      `).join('')}
-    </div>
+    
+    <div class="label" style="margin-bottom: 8px;">(Selected Works by ${m.name.split(' ')[0]} — Geser untuk melihat)</div>
+    
+    <div class="slider-wrap" style="--accent: ${m.color}">
+      ${totalSlides > 1 ? `
+        <button class="slide-btn prev" onclick="moveSlide(-1)">‹</button>
+        <button class="slide-btn next" onclick="moveSlide(1)">›</button>
+      ` : ''}
+      
+<div class="slider-track" id="sliderTrack" onscroll="syncDots()">
+        ${m.works.map((w, i) => {
+          // Deteksi otomatis apakah file adalah video (.mp4 / .webm / .mov)
+          const isVideo = /\.(mp4|webm|mov|ogg)$/i.test(w.img);
+          return `
+            <div class="slide-item">
+              <div class="slide-media">
+                ${isVideo 
+                  ? `<video src="${w.img}" controls autoplay muted loop playsinline></video>` 
+                  : `<img src="${w.img}" alt="${w.title}">`
+                }
+              </div>
+              <div class="slide-caption">
+                <span>${w.title}</span>
+                <span class="slide-counter">${i + 1} / ${totalSlides}</span>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+      
+
+    ${totalSlides > 1 ? `
+      <div class="slide-dots" id="slideDots" style="--accent: ${m.color}">
+        ${m.works.map((_, i) => `
+          <span class="slide-dot ${i === 0 ? 'active' : ''}" onclick="goToSlide(${i})"></span>
+        `).join('')}
+      </div>
+    ` : ''}
   `;
   modal.classList.add('active');
+}
+function closeModal() {
+  document.getElementById('memberModal').classList.remove('active');
+  document.getElementById('modalContent').innerHTML = '';
+}
+function moveSlide(dir) {
+  currentSlide = (currentSlide + dir + totalSlides) % totalSlides;
+  goToSlide(currentSlide);
+}
+
+function goToSlide(index) {
+  currentSlide = index;
+  const track = document.getElementById('sliderTrack');
+  if (track) {
+    track.scrollTo({ left: track.clientWidth * index, behavior: 'smooth' });
+  }
+  updateDots();
+}
+
+function syncDots() {
+  const track = document.getElementById('sliderTrack');
+  if (!track) return;
+  const idx = Math.round(track.scrollLeft / track.clientWidth);
+  if (idx !== currentSlide) {
+    currentSlide = idx;
+    updateDots();
+  }
+}
+
+function updateDots() {
+  document.querySelectorAll('#slideDots .slide-dot').forEach((d, i) => {
+    d.classList.toggle('active', i === currentSlide);
+  });
 }
 
 function closeModal() {
